@@ -1,0 +1,1278 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: UANATACA SIGNCLOUD API DOCUMENTATION
+  x-logo:
+      url: https://i.ibb.co/FwcHkGb/logoUana.png
+      altText: Signcloud logo
+  description: 
+      $ref: ./Signcloud_guide.md
+
+host: cryptoapi.access.bit4id.org:13035
+schemes: 
+  - https
+
+tags:
+  - name: "TOKEN API"
+    description: "
+<html>
+<table>
+  <tr>
+    <th>Method</th><th>Endpoint</th><th>Action</th>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1verify_pin/post' style='color:#E20D1B;'>/verify_pin</td><td>Verify if the specified pin is valid</td>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1change_pin/post' style='color:#E20D1B;'>/change_pin</td><td>Change a token pin</td>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1unlock_pin/post' style='color:#E20D1B;'>/unlock_pin</td><td>Unlock the pin of alocked token</td>
+  </tr>
+</table>
+<html>"
+
+  - name: "RSA API"
+    description: "
+<html>
+<table>    
+  <tr>
+    <th>Method</th><th>Endpoint</th><th>Action</th>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1get_objects/post' style='color:#E20D1B;'>/get_objects</td><td>Retrieve the object of a specified SignCloud account, like the public key or the certificate</td>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1sign_rsa/post' style='color:#E20D1B;'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1decrypt_rsa/post' style='color:#E20D1B;'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
+  </tr>
+</table> 
+</html>"
+
+###### TOKEN API ######
+###############################################################################
+paths:
+  /api/verify_pin:
+    post:
+      summary: VERIFY PIN
+      tags:
+        - TOKEN API
+      description: Verifies if the specified pin is valid.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials for verification.
+        schema:
+          $ref: "#/definitions/Credentials"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": true,
+                    "error": null
+                }
+        401:
+          description: Invalid Credentials
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid credentials",
+                      "code": 401,
+                      "error_code": 1,
+                      "details": ""
+                    }
+                }
+        403:
+          description: Invalid `username` or `pin` , User locked
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Token not found",
+                      "code": 403,
+                      "error_code": 2,
+                      "details": ""
+                    }
+                } 
+        412:
+          description: Missing parameter in JSON object
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Missing parameter",
+                      "code": 412,
+                      "error_code": 6,
+                      "details": "password"
+                    }
+                }
+        420:
+          description: Authentication refused (after 3 failed attempts)
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Authentication refused",
+                      "code": 420,
+                      "error_code": 5,
+                      "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
+                    }
+                }          
+  #############
+  /api/change_pin:
+    post:
+      summary: CHANGE PIN
+      tags:
+        - TOKEN API
+      description: Changes a token pin.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials, as well as the new pin for changing.
+        schema:
+          $ref: "#/definitions/Credentials_changepin"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": true,
+                    "error": null
+                }
+        401:
+          description: Invalid password
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid credentials",
+                      "code": 401,
+                      "error_code": 1,
+                      "details": ""
+                    }
+                } 
+        403:
+          description: Invalid `username` or `pin` , User locked
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Token not found",
+                      "code": 403,
+                      "error_code": 2,
+                      "details": ""
+                    }
+                } 
+        412:
+          description: Missing parameter in JSON object
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Missing parameter",
+                      "code": 412,
+                      "error_code": 6,
+                      "details": "password"
+                    }
+                }
+        420:
+          description: Authentication refused (after 3 failed attempts)
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Authentication refused",
+                      "code": 420,
+                      "error_code": 5,
+                      "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
+                    }
+                }
+        500:
+          description: Internal Server Error
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Internal Server Error",
+                      "code": 500,
+                      "error_code": 100,
+                      "details": "'NEWPIN' must contain at least 2 numbers"
+                    }
+                }          
+  #############
+  /api/unlock_pin:
+    post:
+      summary: UNLOCK PIN
+      tags:
+        - TOKEN API
+      description: Unlocks the pin of a locked token.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: This JSON object includes the puk code, necessary to create a new pin code for a blocked token.
+        schema:
+          $ref: "#/definitions/Credentials_unlockpin"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": true,
+                    "error": null
+                }
+        401:
+          description: Invalid password
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid credentials",
+                      "code": 401,
+                      "error_code": 1,
+                      "details": ""
+                    }
+                }
+        403:
+          description: Invalid `username` or `puk`
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Token not found",
+                      "code": 403,
+                      "error_code": 2,
+                      "details": ""
+                    }
+                }
+        412:
+          description: Missing parameter in JSON object
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Missing parameter",
+                      "code": 412,
+                      "error_code": 6,
+                      "details": "password"
+                    }
+                }
+        420:
+          description: Authentication refused (after 3 failed attempts)
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Authentication refused",
+                      "code": 420,
+                      "error_code": 5,
+                      "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
+                    }
+                }
+###### TOKEN API ######
+###############################################################################
+  /api/get_objects:
+    post:
+      summary: GET OBJECTS
+      tags:
+        - RSA API
+      description: Retrieves the object of a specified SignCloud account, like the public key or the certificate.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials for verification.
+        schema:
+          $ref: "#/definitions/Credentials_getobjects"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                description: The result JSON object
+                properties:
+                  data: 
+                    type: string
+                  type:
+                    type: number
+                  ckaid:
+                    type: string
+                  label:
+                    type: string
+              error:
+                type: boolean
+                description: The request error key
+          examples:
+            application/json:
+              {
+                  "result": [
+                      {
+                          "data": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArG9kf4t5lIRC96PfuhKGi0CmdCqUxYb3VstbwkvVdmSUBWm+OV1RzhSAR7BxP67e+5VsqKRN+PD273gA676xHIP1VDvrLmX3eOGqq6h3hpU+mQHQ8hzhONyv/uEDmF4ooJXh+zEjfGce/8K42VcMHmMrqj2GRQoyRmX02m95XiY8VMP7mqp5kmDHGQkWsDtJBKhXqMac4GbO8+yiw6MwR2xGhESxS09aaRjqp4bjvRMfFuNSZQL7/2jNufGbU+CBpnxrOoN+AP+vPOIhgXPlEC8Qk6POdKG9FHKLXVtz4DvPeHKyQ+MVbErjVyhK8fTOaR3BnZ+0bGHFf2AovRVfUwIDAQAB",
+                          "type": 3,
+                          "ckaid": "DS0",
+                          "label": "DS0_PublicKey"
+                      },
+                      {
+                         "data": "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", 
+                          "type": 4,
+                          "ckaid": "DS0",
+                          "label": "DS0_Certificate"
+                      }                    
+                  ],
+                  "error": null
+              }
+        401:
+          description: Invalid password
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid credentials",
+                      "code": 401,
+                      "error_code": 1,
+                      "details": ""
+                    }
+                }
+        403:
+          description: Invalid `username` , User locked
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Token locked",
+                      "code": 403,
+                      "error_code": 2,
+                      "details": ""
+                    }
+                } 
+        412:
+          description: Missing parameter in JSON object
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Missing parameter",
+                      "code": 412,
+                      "error_code": 6,
+                      "details": "password"
+                    }
+                }
+        420:
+          description: Authentication refused (after 3 failed attempts)
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Authentication refused",
+                      "code": 420,
+                      "error_code": 5,
+                      "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
+                    }
+                }
+        500:
+          description: Internal Server Error. `identifier` or `mechanism` not supported
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Internal Server Error",
+                      "code": 500,
+                      "error_code": 100,
+                      "details": "Mechanism xxxyyy is not supported"
+                    }
+                } 
+#############
+  /api/sign_rsa:
+    post:
+      summary: SIGN RSA
+      tags:
+        - RSA API
+      description: "Signs a base64 encoded buffer."
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials for verification.
+        schema:
+          $ref: "#/definitions/Credentials_signrsa"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": "iaJp+O8CxSOPlPL4Eg4KBnlXDG+6g16wgp4ihVLIu3tJDIWFUFUHNgF/8+R1x3TJg4dCpKk6h3Tf+PapnJjGBgxnLeIA5nvdvKFu99Zlm0mS0Y6yjy6wMCEocWFtV+UBVpgXeDHae3XuiSHFu8c9TM7zdlnfmPRkZNHlb+HgafczuMAOfVsPepYsI4qlFIjS76v/6IczeGHV/aeSOa24jyNQsuVgBmbhHqqB8XQS9hHf+rQhvAgFv1o35HRgVDoNr93lkTflT88cjY+ip8ndc2QyY2nuuZmE4OR0ElGUV+9h+6/HMpl0hkHTX/NGRSdipHnZ93bNAahRRVK4okQLRQ==",
+                    "error": null
+                }        
+        401:
+          description: Invalid password
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid credentials",
+                      "code": 401,
+                      "error_code": 1,
+                      "details": ""
+                    }
+                }
+        403:
+          description: Invalid `username` or `pin` , User locked
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Token not found",
+                      "code": 403,
+                      "error_code": 2,
+                      "details": ""
+                    }
+                } 
+        412:
+          description: Missing parameter in JSON object
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Missing parameter",
+                      "code": 412,
+                      "error_code": 6,
+                      "details": "billing_username"
+                    }
+                }
+        420:
+          description: Authentication refused (after 3 failed attempts)
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Authentication refused",
+                      "code": 420,
+                      "error_code": 5,
+                      "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
+                    }
+                }
+        500:
+          description: "Internal Server Error. Wrong `identifier` or `mechanism` or `billing_username` or `billing_password`"
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Internal Server Error",
+                      "code": 500,
+                      "error_code": 100,
+                      "details": "Invalid billing credentials"
+                    }
+                } 
+#############
+  /api/decrypt_rsa:
+    post:
+      summary: DECRYPT RSA
+      tags:
+        - RSA API
+      description: Decrypts a base64 buffer.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials for verification.
+        schema:
+          $ref: "#/definitions/Credentials_decryptrsa"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": "T3VyIG1lc3NhZ2UK",
+                    "error": null
+                }  
+        401:
+          description: Invalid password
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid credentials",
+                      "code": 401,
+                      "error_code": 1,
+                      "details": ""
+                    }
+                }
+        403:
+          description: User locked or Invalid `username` or `pin` 
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Invalid Pin",
+                      "code": 403,
+                      "error_code": 2,
+                      "details": ""
+                    }
+                } 
+        412:
+          description: Missing parameter in JSON object
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Missing parameter",
+                      "code": 412,
+                      "error_code": 6,
+                      "details": "billing_username"
+                    }
+                }
+        420:
+          description: Authentication refused (after 3 failed attempts)
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Authentication refused",
+                      "code": 420,
+                      "error_code": 5,
+                      "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
+                    }
+                }
+        500:
+          description: "Internal Server Error. Wrong `identifier` or `billing_username` or `billing_password`"
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+                description: The request result key
+              error:
+                description: The error JSON object
+                properties:
+                  msg: 
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+                {
+                    "result": null,
+                    "error": {
+                      "msg": "Internal Server Error",
+                      "code": 500,
+                      "error_code": 100,
+                      "details": "DecryptFailed"
+                    }
+                } 
+
+definitions:
+  Credentials:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      pin:
+          type: "string"
+          description: The token pin
+  Credentials_changepin:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      pin:
+          type: "string"
+          description: The token pin
+      newpin:
+          type: "string"
+          description: The new token pin
+  Credentials_unlockpin:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      newpin:
+          type: "string"
+          description: The new token pin
+      puk:
+          type: "string"
+          description: The token puk
+  Credentials_getobjects:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      type:
+          type: "number"
+          enum: [0,1,3,4]
+          description: "The object type. Allowed values are: Data = 0; Key = 1; PublicKey = 3; Certificate = 4;"
+      identifier:
+          type: "string"
+          description: ID of the key used for signing
+  Credentials_signrsa:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      pin:
+          type: "string"
+          description: The token pin
+      identifier:
+          type: "string"
+          description: ID of the key used for signing
+      mechanism:
+          type: "string"
+          description: "Algorithm used for signing. Supported algorithms are: RSAMD5; RSASHA1; RSASHA256; RSA512; RSARAW;"
+      plaintext:
+          type: "string"
+          description: Base64 encoded buffer for signing
+      billing_username:
+          type: "string"
+          description: The username of the billing account
+      billing_password:
+          type: "string"
+          description: The password of the billing account
+  Credentials_decryptrsa:
+    type: "object"
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      pin:
+          type: "string"
+          description: The token pin
+      identifier:
+          type: "string"
+          description: ID of the key used for signing
+      ciphertext:
+          type: "string"
+          description: Text to decrypt
+      billing_username:
+          type: "string"
+          description: The username of the billing account
+      billing_password:
+          type: "string"
+          description: The password of the billing account
