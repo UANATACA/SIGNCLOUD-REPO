@@ -6,7 +6,7 @@ info:
       url: https://i.ibb.co/FwcHkGb/logoUana.png
       altText: Signcloud logo
   description: 
-      $ref: ./Signcloud_guide.md
+      $ref: ./signcloud_gui.md
 
 host: cryptoapi.access.bit4id.org:13035
 schemes: 
