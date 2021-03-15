@@ -1240,7 +1240,7 @@ definitions:
           description: SignCloud account password
       type:
           type: "string"
-          enum: [null,3,4]
+          enum: ["null","3","4"]
           description: "The object type. Allowed values are: PublicKey = 3; Certificate = 4; Both = null"
       identifier:
           type: "string"
