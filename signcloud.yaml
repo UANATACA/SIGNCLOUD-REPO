@@ -1269,7 +1269,8 @@ definitions:
           description: SignCloud account PIN
       identifier:
           type: "string"
-          description: ID of the key used for signing
+          default: "DS0"
+          description: Identifier of the pair of keys
       mechanism:
           type: "string"
           description: "Algorithm used for signing. Supported algorithms are: RSAMD5; RSASHA1; RSASHA256; RSASHA512; RSARAW;"
@@ -1278,10 +1279,10 @@ definitions:
           description: Base64 encoded buffer for signing
       billing_username:
           type: "string"
-          description: The billing account username
+          description: Billing account username
       billing_password:
           type: "string"
-          description: The billing account password
+          description: Billing account password
   Credentials_decryptrsa:
     type: "object"
     required:
@@ -1304,13 +1305,14 @@ definitions:
           description: SignCloud account PIN
       identifier:
           type: "string"
-          description: ID of the key used for signing
+          default: "DS0"
+          description: Identifier of the pair of keys
       ciphertext:
           type: "string"
           description: Text to decrypt
       billing_username:
           type: "string"
-          description: The username of the billing account
+          description: Billing account username
       billing_password:
           type: "string"
-          description: The password of the billing account
+          description: Billing account password
