@@ -13,55 +13,53 @@ schemes:
   - https
 
 tags:
-  - name: "Token"
+  - name: "TOKEN API"
     description: "
 <html>
-A virtual token is a cloud certificate associated to a SignCloud account.</br>
 <table>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Token/paths/~1api~1verify_pin/post'>/verify_pin</td><td>Verify if the virtual token PIN is valid</td>
+    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1verify_pin/post' style='color:#E20D1B;'>/verify_pin</td><td>Verify if the specified pin is valid</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Token/paths/~1api~1change_pin/post'>/change_pin</td><td>Change a virtual token PIN</td>
+    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1change_pin/post' style='color:#E20D1B;'>/change_pin</td><td>Change a token pin</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Token/paths/~1api~1unlock_pin/post'>/unlock_pin</td><td>Unlock the PIN of a locked virutal token</td>
+    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1unlock_pin/post' style='color:#E20D1B;'>/unlock_pin</td><td>Unlock the pin of alocked token</td>
   </tr>
 </table>
 <html>"
 
-  - name: "RSA"
+  - name: "RSA API"
     description: "
 <html>
-Sign and decrypt Base64 buffers or get objects associated to a SignCloud account.</br>
 <table>    
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the object of a specified SignCloud account, like the public key or the certificate</td>
+    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1get_objects/post' style='color:#E20D1B;'>/get_objects</td><td>Retrieve the object of a specified SignCloud account, like the public key or the certificate</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1sign_rsa/post'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
+    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1sign_rsa/post' style='color:#E20D1B;'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1decrypt_rsa/post'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
+    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1decrypt_rsa/post' style='color:#E20D1B;'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
   </tr>
 </table> 
 </html>"
 
-###### Token ######
+###### TOKEN API ######
 ###############################################################################
 paths:
   /api/verify_pin:
     post:
       summary: VERIFY PIN
       tags:
-        - Token
-      description: Verifies if the specified PIN is valid.
+        - TOKEN API
+      description: Verifies if the specified pin is valid.
       consumes:
         - application/json
       produces:
@@ -69,6 +67,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
+        description: JSON object that includes the user credentials for verification.
         schema:
           $ref: "#/definitions/Credentials"
       responses:
@@ -216,13 +215,109 @@ paths:
                       "error_code": 5,
                       "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
                     }
-                }          
+                }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://cryptoapi.access.bit4id.org:13035/api/verify_pin \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "pin": "belorado74"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/verify_pin',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://cryptoapi.access.bit4id.org:13035/api/verify_pin"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "pin": "belorado74"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/verify_pin',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          pin: 'belorado74'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/verify_pin", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }        
   #############
   /api/change_pin:
     post:
       summary: CHANGE PIN
       tags:
-        - Token
+        - TOKEN API
       description: Changes a token pin.
       produces:
         - application/json
@@ -409,13 +504,114 @@ paths:
                       "error_code": 100,
                       "details": "'NEWPIN' must contain at least 2 numbers"
                     }
-                }          
+                }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://cryptoapi.access.bit4id.org:13035/api/change_pin \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "pin": "belorado74",
+                      "newpin": "belorado75"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/change_pin',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74',
+                        newpin: 'belorado75'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://cryptoapi.access.bit4id.org:13035/api/change_pin"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "pin": "belorado74",
+                    "newpin": "belorado75"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/change_pin',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74',
+                        newpin: 'belorado75'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          pin: 'belorado74',
+                          newpin: 'belorado75'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/change_pin", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }                  
   #############
   /api/unlock_pin:
     post:
       summary: UNLOCK PIN
       tags:
-        - Token
+        - TOKEN API
       description: Unlocks the pin of a locked token.
       produces:
         - application/json
@@ -424,7 +620,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: This JSON object includes the PUK code, necessary to create a new pin code for a blocked token.
+        description: This JSON object includes the puk code, necessary to create a new pin code for a blocked token.
         schema:
           $ref: "#/definitions/Credentials_unlockpin"
       responses:
@@ -573,13 +769,114 @@ paths:
                       "details": "Last authentication attempt failed, next attempt will be accepted in 52 seconds"
                     }
                 }
-###### Token ######
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://cryptoapi.access.bit4id.org:13035/api/unlock_pin \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "newpin": "belorado74",
+                      "puk": "b5UGHR2u"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/unlock_pin',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        newpin: 'belorado74',
+                        puk: 'b5UGHR2u'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://cryptoapi.access.bit4id.org:13035/api/unlock_pin"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "newpin": "belorado74",
+                    "puk": "b5UGHR2u"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/unlock_pin',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        newpin: 'belorado74',
+                        puk: 'b5UGHR2u'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          newpin: 'string',
+                          puk: 'b5UGHR2u'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/unlock_pin", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
+###### TOKEN API ######
 ###############################################################################
   /api/get_objects:
     post:
       summary: GET OBJECTS
       tags:
-        - RSA
+        - RSA API
       description: Retrieves the object of a specified SignCloud account, like the public key or the certificate.
       produces:
         - application/json
@@ -779,13 +1076,114 @@ paths:
                       "error_code": 100,
                       "details": "Mechanism xxxyyy is not supported"
                     }
-                } 
+                }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://cryptoapi.access.bit4id.org:13035/api/get_objects \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "type": "null",
+                      "identifier": "DS0"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/get_objects',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        type: 'null',
+                        identifier: 'DS0'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://cryptoapi.access.bit4id.org:13035/api/get_objects"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "type": "null",
+                    "identifier": "DS0"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/get_objects',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        type: 'null',
+                        identifier: 'DS0'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          type: 'null',
+                          identifier: 'DS0'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/get_objects", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 #############
   /api/sign_rsa:
     post:
       summary: SIGN RSA
       tags:
-        - RSA
+        - RSA API
       description: "Signs a base64 encoded buffer."
       produces:
         - application/json
@@ -972,13 +1370,134 @@ paths:
                       "error_code": 100,
                       "details": "Invalid billing credentials"
                     }
-                } 
+                }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://cryptoapi.access.bit4id.org:13035/api/sign_rsa \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "pin": "belorado74",
+                      "identifier": "DS0",
+                      "mechanism": "RSARAW",
+                      "plaintext": "T3V0IG1lc3NhZ2UK",
+                      "billing_username": "billing_user@domain",
+                      "billing_password": "z5qNqkfB"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74',
+                        identifier: 'DS0',
+                        mechanism: 'RSARAW',
+                        plaintext: 'T3V0IG1lc3NhZ2UK',
+                        billing_username: 'billing_user@domain',
+                        billing_password: 'z5qNqkfB'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://cryptoapi.access.bit4id.org:13035/api/sign_rsa"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "pin": "belorado74",
+                    "identifier": "DS0",
+                    "mechanism": "RSARAW",
+                    "plaintext": "T3V0IG1lc3NhZ2UK",
+                    "billing_username": "billing_user@domain",
+                    "billing_password": "z5qNqkfB"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74',
+                        identifier: 'DS0',
+                        mechanism: 'RSARAW',
+                        plaintext: 'T3V0IG1lc3NhZ2UK',
+                        billing_username: 'billing_user@domain',
+                        billing_password: 'z5qNqkfB'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          pin: 'belorado74',
+                          identifier: 'DS0',
+                          mechanism: 'RSARAW',
+                          plaintext: 'T3V0IG1lc3NhZ2UK',
+                          billing_username: 'billing_user@domain',
+                          billing_password: 'z5qNqkfB'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/sign_rsa", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 #############
   /api/decrypt_rsa:
     post:
       summary: DECRYPT RSA
       tags:
-        - RSA
+        - RSA API
       description: Decrypts a base64 buffer.
       produces:
         - application/json
@@ -1166,14 +1685,130 @@ paths:
                       "details": "DecryptFailed"
                     }
                 } 
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    https://cryptoapi.access.bit4id.org:13035/api/sign_rsa \
+                    -H 'Content-Type: application/json' \
+                    -d '{
+                      "username": "5057249",
+                      "password": "Gy6F89xK",
+                      "pin": "belorado74",
+                      "identifier": "DS0",
+                      "mechanism": "RSARAW",
+                      "plaintext": "T3V0IG1lc3NhZ2UK",
+                      "billing_username": "billing_user@domain",
+                      "billing_password": "z5qNqkfB"
+                    }'
+        - lang: 'Javascript'
+          source: |
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74',
+                        identifier: 'DS0',
+                        mechanism: 'RSARAW',
+                        plaintext: 'T3V0IG1lc3NhZ2UK',
+                        billing_username: 'billing_user@domain',
+                        billing_password: 'z5qNqkfB'
+                      })
+                    }
+                  );
 
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://cryptoapi.access.bit4id.org:13035/api/sign_rsa"
+
+                  payload = {
+                    "username": "5057249",
+                    "password": "Gy6F89xK",
+                    "pin": "belorado74",
+                    "identifier": "DS0",
+                    "mechanism": "RSARAW",
+                    "plaintext": "T3V0IG1lc3NhZ2UK",
+                    "billing_username": "billing_user@domain",
+                    "billing_password": "z5qNqkfB"
+                  }
+
+                  headers = {"Content-Type": "application/json"}
+
+                  response = requests.post(url, json=payload, headers=headers)
+
+                  data = response.json()
+                  print(data)
+        - lang: 'Node.js'
+          source: |
+                  const fetch = require('node-fetch');
+
+                  const resp = await fetch(
+                    'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        username: '5057249',
+                        password: 'Gy6F89xK',
+                        pin: 'belorado74',
+                        identifier: 'DS0',
+                        mechanism: 'RSARAW',
+                        plaintext: 'T3V0IG1lc3NhZ2UK',
+                        billing_username: 'billing_user@domain',
+                        billing_password: 'z5qNqkfB'
+                      })
+                    }
+                  );
+
+                  const data = await resp.json();
+                  console.log(data);
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+                  using System.Text;
+                  using Newtonsoft.Json.Linq;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+                        JObject json = JObject.Parse(@"{
+                          username: '5057249',
+                          password: 'Gy6F89xK',
+                          pin: 'belorado74',
+                          identifier: 'DS0',
+                          mechanism: 'RSARAW',
+                          plaintext: 'T3V0IG1lc3NhZ2UK',
+                          billing_username: 'billing_user@domain',
+                          billing_password: 'z5qNqkfB'
+                        }");
+                        var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                        var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/sign_rsa", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }
 definitions:
   Credentials:
     type: "object"
-    required:
-    - username
-    - password
-    - pin
     properties:
       username:
           type: "string"
@@ -1183,14 +1818,9 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: SignCloud account PIN
+          description: The token pin
   Credentials_changepin:
     type: "object"
-    required:
-    - username
-    - password
-    - pin
-    - newpin
     properties:
       username:
           type: "string"
@@ -1200,17 +1830,12 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: SignCloud account PIN
+          description: The token pin
       newpin:
           type: "string"
-          description: The new SignCloud account PIN
+          description: The new token pin
   Credentials_unlockpin:
     type: "object"
-    required:
-    - username
-    - password
-    - newpin
-    - puk
     properties:
       username:
           type: "string"
@@ -1220,17 +1845,12 @@ definitions:
           description: SignCloud account password
       newpin:
           type: "string"
-          description: The new SignCloud account PIN
+          description: The new token pin
       puk:
           type: "string"
-          description: The token PUK
+          description: The token puk
   Credentials_getobjects:
     type: "object"
-    required:
-    - username
-    - password
-    - type
-    - identifier
     properties:
       username:
           type: "string"
@@ -1239,24 +1859,14 @@ definitions:
           type: "string"
           description: SignCloud account password
       type:
-          type: "string"
-          enum: ["null","3","4"]
-          description: "The object type. Allowed values are: PublicKey = 3; Certificate = 4; Both = null"
+          type: "number"
+          enum: [0,1,3,4]
+          description: "The object type. Allowed values are: Data = 0; Key = 1; PublicKey = 3; Certificate = 4;"
       identifier:
           type: "string"
-          default: "DS0"
-          description: Identifier of the pair of keys.
+          description: ID of the key used for signing
   Credentials_signrsa:
     type: "object"
-    required:
-    - username
-    - password
-    - pin
-    - identifier
-    - mechanism
-    - plaintext
-    - billing_username
-    - billing_password
     properties:
       username:
           type: "string"
@@ -1266,33 +1876,24 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: SignCloud account PIN
+          description: The token pin
       identifier:
           type: "string"
-          default: "DS0"
-          description: Identifier of the pair of keys
+          description: ID of the key used for signing
       mechanism:
           type: "string"
-          description: "Algorithm used for signing. Supported algorithms are: RSAMD5; RSASHA1; RSASHA256; RSASHA512; RSARAW;"
+          description: "Algorithm used for signing. Supported algorithms are: RSAMD5; RSASHA1; RSASHA256; RSA512; RSARAW;"
       plaintext:
           type: "string"
           description: Base64 encoded buffer for signing
       billing_username:
           type: "string"
-          description: Billing account username
+          description: The username of the billing account
       billing_password:
           type: "string"
-          description: Billing account password
+          description: The password of the billing account
   Credentials_decryptrsa:
     type: "object"
-    required:
-    - username
-    - password
-    - pin
-    - identifier
-    - ciphertext
-    - billing_username
-    - billing_password
     properties:
       username:
           type: "string"
@@ -1302,17 +1903,16 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: SignCloud account PIN
+          description: The token pin
       identifier:
           type: "string"
-          default: "DS0"
-          description: Identifier of the pair of keys
+          description: ID of the key used for signing
       ciphertext:
           type: "string"
           description: Text to decrypt
       billing_username:
           type: "string"
-          description: Billing account username
+          description: The username of the billing account
       billing_password:
           type: "string"
-          description: Billing account password
+          description: The password of the billing account
