@@ -13,53 +13,55 @@ schemes:
   - https
 
 tags:
-  - name: "TOKEN API"
+  - name: "Token"
     description: "
 <html>
+A virtual token is a cloud certificate associated to a SignCloud account.</br>
 <table>
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1verify_pin/post' style='color:#E20D1B;'>/verify_pin</td><td>Verify if the specified pin is valid</td>
+    <td>POST</td><td><a href='#tag/Token/paths/~1api~1verify_pin/post'>/verify_pin</td><td>Verify if the virtual token PIN is valid</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1change_pin/post' style='color:#E20D1B;'>/change_pin</td><td>Change a token pin</td>
+    <td>POST</td><td><a href='#tag/Token/paths/~1api~1change_pin/post'>/change_pin</td><td>Change a virtual token PIN</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/TOKEN-API/paths/~1api~1unlock_pin/post' style='color:#E20D1B;'>/unlock_pin</td><td>Unlock the pin of alocked token</td>
+    <td>POST</td><td><a href='#tag/Token/paths/~1api~1unlock_pin/post'>/unlock_pin</td><td>Unlock the PIN of a locked virutal token</td>
   </tr>
 </table>
 <html>"
 
-  - name: "RSA API"
+  - name: "RSA"
     description: "
 <html>
+Sign and decrypt Base64 buffers or get objects associated to a SignCloud account.</br>
 <table>    
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1get_objects/post' style='color:#E20D1B;'>/get_objects</td><td>Retrieve the object of a specified SignCloud account, like the public key or the certificate</td>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the public key and certificate of a specified SignCloud account</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1sign_rsa/post' style='color:#E20D1B;'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1sign_rsa/post'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA-API/paths/~1api~1decrypt_rsa/post' style='color:#E20D1B;'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1decrypt_rsa/post'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
   </tr>
 </table> 
 </html>"
 
-###### TOKEN API ######
+###### Token ######
 ###############################################################################
 paths:
   /api/verify_pin:
     post:
       summary: VERIFY PIN
       tags:
-        - TOKEN API
-      description: Verifies if the specified pin is valid.
+        - Token
+      description: Verifies if the specified PIN is valid.
       consumes:
         - application/json
       produces:
@@ -67,7 +69,6 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: JSON object that includes the user credentials for verification.
         schema:
           $ref: "#/definitions/Credentials"
       responses:
@@ -317,8 +318,8 @@ paths:
     post:
       summary: CHANGE PIN
       tags:
-        - TOKEN API
-      description: Changes a token pin.
+        - Token
+      description: Changes a token PIN.
       produces:
         - application/json
       consumes:
@@ -326,7 +327,6 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: JSON object that includes the user credentials, as well as the new pin for changing.
         schema:
           $ref: "#/definitions/Credentials_changepin"
       responses:
@@ -611,8 +611,8 @@ paths:
     post:
       summary: UNLOCK PIN
       tags:
-        - TOKEN API
-      description: Unlocks the pin of a locked token.
+        - Token
+      description: Unlocks the PIN of a locked token.
       produces:
         - application/json
       consumes:
@@ -620,7 +620,6 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: This JSON object includes the puk code, necessary to create a new pin code for a blocked token.
         schema:
           $ref: "#/definitions/Credentials_unlockpin"
       responses:
@@ -876,8 +875,8 @@ paths:
     post:
       summary: GET OBJECTS
       tags:
-        - RSA API
-      description: Retrieves the object of a specified SignCloud account, like the public key or the certificate.
+        - RSA
+      description: Retrieves the public key or the certificate of a specified SignCloud account.
       produces:
         - application/json
       consumes:
@@ -1183,7 +1182,7 @@ paths:
     post:
       summary: SIGN RSA
       tags:
-        - RSA API
+        - RSA
       description: "Signs a base64 encoded buffer."
       produces:
         - application/json
@@ -1497,7 +1496,7 @@ paths:
     post:
       summary: DECRYPT RSA
       tags:
-        - RSA API
+        - RSA
       description: Decrypts a base64 buffer.
       produces:
         - application/json
@@ -1809,6 +1808,10 @@ paths:
 definitions:
   Credentials:
     type: "object"
+    required:
+    - username
+    - password
+    - pin    
     properties:
       username:
           type: "string"
@@ -1818,9 +1821,14 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: The token pin
+          description: SignCloud account PIN
   Credentials_changepin:
     type: "object"
+    required:
+    - username
+    - password
+    - pin
+    - newpin    
     properties:
       username:
           type: "string"
@@ -1830,12 +1838,17 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: The token pin
+          description: SignCloud account PIN
       newpin:
           type: "string"
-          description: The new token pin
+          description: The new SignCloud account PIN
   Credentials_unlockpin:
     type: "object"
+    required:
+    - username
+    - password
+    - newpin
+    - puk    
     properties:
       username:
           type: "string"
@@ -1845,12 +1858,17 @@ definitions:
           description: SignCloud account password
       newpin:
           type: "string"
-          description: The new token pin
+          description: The new SignCloud account PIN
       puk:
           type: "string"
-          description: The token puk
+          description: The token PUK
   Credentials_getobjects:
     type: "object"
+    required:
+    - username
+    - password
+    - type
+    - identifier
     properties:
       username:
           type: "string"
@@ -1859,14 +1877,24 @@ definitions:
           type: "string"
           description: SignCloud account password
       type:
-          type: "number"
-          enum: [0,1,3,4]
-          description: "The object type. Allowed values are: Data = 0; Key = 1; PublicKey = 3; Certificate = 4;"
+          type: "string"
+          enum: ["null","3","4"]
+          description: "The object type. Allowed values are: PublicKey = 3; Certificate = 4; Both = null"
       identifier:
           type: "string"
-          description: ID of the key used for signing
+          default: "DS0"
+          description: Identifier of the pair of keys.
   Credentials_signrsa:
     type: "object"
+    required:
+    - username
+    - password
+    - pin
+    - identifier
+    - mechanism
+    - plaintext
+    - billing_username
+    - billing_password
     properties:
       username:
           type: "string"
@@ -1876,24 +1904,33 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: The token pin
+          description: SignCloud account PIN
       identifier:
           type: "string"
-          description: ID of the key used for signing
+          default: "DS0"
+          description: Identifier of the pair of keys
       mechanism:
           type: "string"
-          description: "Algorithm used for signing. Supported algorithms are: RSAMD5; RSASHA1; RSASHA256; RSA512; RSARAW;"
+          description: "Algorithm used for signing. Supported algorithms are: RSAMD5; RSASHA1; RSASHA256; RSASHA512; RSARAW;"
       plaintext:
           type: "string"
           description: Base64 encoded buffer for signing
       billing_username:
           type: "string"
-          description: The username of the billing account
+          description: Billing account username
       billing_password:
           type: "string"
-          description: The password of the billing account
+          description: Billing account password
   Credentials_decryptrsa:
     type: "object"
+    required:
+    - username
+    - password
+    - pin
+    - identifier
+    - ciphertext
+    - billing_username
+    - billing_password
     properties:
       username:
           type: "string"
@@ -1903,16 +1940,17 @@ definitions:
           description: SignCloud account password
       pin:
           type: "string"
-          description: The token pin
+          description: SignCloud account PIN
       identifier:
           type: "string"
-          description: ID of the key used for signing
+          default: "DS0"
+          description: Identifier of the pair of keys
       ciphertext:
           type: "string"
           description: Text to decrypt
       billing_username:
           type: "string"
-          description: The username of the billing account
+          description: Billing account username
       billing_password:
           type: "string"
-          description: The password of the billing account
+          description: Billing account password
