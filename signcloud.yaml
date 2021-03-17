@@ -1077,6 +1077,14 @@ paths:
                     }
                 }
       x-codeSamples:
+        - lang: 'Payload'
+          source: |
+                  {
+                    "username": "12346548",
+                    "password": "string",
+                    "type": "null",
+                    "identifier": "DS0"
+                  }    
         - lang: 'curl'
           source: |
                   curl -i -X POST \
