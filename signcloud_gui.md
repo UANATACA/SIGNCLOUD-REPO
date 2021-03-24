@@ -10,13 +10,16 @@ SignCloud is the solution for the enrolment, custody and usage of PKI remote cre
 
 This image summarizes how SignCloud works:
 
-![img](https://developers.uanataca.com/static/images/howitworks_signcloud.png)
+![img](https://i.ibb.co/rsR6tgL/signcloud-hiw.png)
+<br></br>
+
 <div style="text-align: justify">
 SignCloud integrates a server side Digital Signature Engine, an Authentication Server, a certified Hardware Security Module (HSM) and an encrypted DB. During the enrollment phase the End User key-pair is generated on-board of the HSM in a secure environment.<br></br>
 </div>
 
 <div style="text-align: justify">
-The private keys are stored and protected by means of the Key Wrapping, a certified native mechanism offered by the HSM. The creation and enrollment of a Remote Virtual Token is performed by means of the Bit4id smartCMS or by means of API.<br></br>
+The private keys are stored and protected by means of the Key Wrapping, a certified native mechanism offered by the HSM. The creation and enrollment of a Remote Virtual Token is performed by means of the Bit4id smartCMS or by means of API.
+<br></br>
 </div>
 
 <div style="text-align: justify">
