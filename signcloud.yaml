@@ -12,6 +12,12 @@ host: cryptoapi.access.bit4id.org:13035
 schemes: 
   - https
 
+x-tagGroups:
+  - name: API Reference
+    tags:
+      - Token
+      - RSA
+
 tags:
   - name: "Token"
     description: "
