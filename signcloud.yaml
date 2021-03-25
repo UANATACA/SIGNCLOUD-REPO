@@ -3,7 +3,7 @@ info:
   version: '1.0'
   title: UANATACA SIGNCLOUD API DOCUMENTATION
   x-logo:
-      url: https://i.ibb.co/QrsG1Cs/signbox-logo.png
+      url: https://i.ibb.co/hgVv8qj/signcloud-logo.png
       altText: Signcloud logo
   description: 
       $ref: ./signcloud_gui.md
