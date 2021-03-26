@@ -10,7 +10,7 @@ SignCloud is the solution for the enrolment, custody and usage of PKI remote cre
 
 This image summarizes how SignCloud works:
 
-![img](https://i.ibb.co/rsR6tgL/signcloud-hiw.png)
+![img](https://raw.githubusercontent.com/UANATACA/SIGNCLOUD-REPO/main/img/signcloud-hiw.png?token=ATF574RBIQRMTBZ3ZXJHXF3ALXHH2)
 <br></br>
 
 <div style="text-align: justify">
