@@ -1,12 +1,10 @@
-# Introduction
-
-## What it is
+# What it is
 
 <div style="text-align: justify">
 SignCloud is the solution for the enrolment, custody and usage of PKI remote credentials. SignCloud allows to digitally sign any document from any platform, desktop and mobile, exploiting a Secure Element on the Cloud, a Remote Virtual Token, thus releasing the End User from the burden of operating a smart card, USB token or any other sort of cryptographic device.
 </div>
 
-## How it works
+# How it works
 
 This image summarizes how SignCloud works:
 
@@ -156,7 +154,4 @@ and **{resource}** is the name of the resource of our interest.
   https://{signcloudhost}/api/sign_rsa
 
   https://{signcloudhost}/api/get_objects  
-
-
-# API Reference
 
