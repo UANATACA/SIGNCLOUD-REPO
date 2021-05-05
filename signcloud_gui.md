@@ -28,9 +28,24 @@ The credentials binding a Virtual Token to an End User identity are created duri
 Every third-party Signature Creation Application (SCA) (e.g. client application, web applet, etc.) can be interfaced with the Virtual Token thanks to an extended middleware library that implements the standard cryptographic interfaces for each operating system (PKCS#11, MS CSP, TokenD).<br></br>
 </div>
 
-# Requests and Responses
+# Endpoint URLs
 
-## Requests
+In order to use SignCloud API, every url must be composed as follows:
+
+	https://{signcloudhost}/api/{resource}
+
+The {signcloudhost} changes according to the environment:
+
+- **cryptoapi.access.bit4id.org:13035** if the environment is **test**
+- **cryptoapi.uanataca.com** if the environment is **production**
+
+and {resource} is the name of the resource of our interest.<br>
+
+**Example:**
+
+  https://cryptoapi.uanataca.com/api/sign_rsa
+
+# Requests
 <div style="text-align: justify">
 Every request made to SignCloud must have as content type header "application/json", so the request body must be a JSON object.
 </div>
@@ -41,9 +56,9 @@ A simple HTTP POST request made with curl.
 
 	1 | curl -H "Content-Type: application/json" -d @params.json -X POST https://{signcloudhost}/api/sign_rsa
 
-## Responses
+# Responses
 
-The response of each api is a json object with just 2 keys:
+The response of each api call is a JSON object with just 2 keys:
 
 <html>
 <table>
@@ -136,22 +151,11 @@ Below a list of HTTP codes, and their description, that can be returned by SignC
 </br> 
 </html>
 
-## URLs
 
-In order to use SignCloud API, every url must be composed as follows:
+# Postman collection
 
-  https://{signcloudhost}/api/{resource}
+A postman collection is available as a support for a quick start.<br>
 
-The {signcloudhost} changes according to the environment:
+<a href="https://cdn.bit4id.com/es/uanataca/public/signcloud/Uanataca_SignCloud_Postman.zip"> SignCloud Postman collection download</a>
 
-- **cryptoapi.access.bit4id.org:13035** if the environment is **test**
-- **cryptoapi.uanataca.com** if the environment is **production**
-
-and **{resource}** is the name of the resource of our interest.
-
-**Url Examples:**
-
-  https://{signcloudhost}/api/sign_rsa
-
-  https://{signcloudhost}/api/get_objects  
-
+<div id="APIReference" style="padding-top: 60px;"><h1>API Reference<h1></div>

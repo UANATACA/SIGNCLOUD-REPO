@@ -230,9 +230,9 @@ paths:
                     https://cryptoapi.access.bit4id.org:13035/api/verify_pin \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
-                      "pin": "belorado74"
+                      "username": "1122338",
+                      "password": "7T8xdGBN",
+                      "pin": "w98nZZDR"
                     }'
         - lang: 'Javascript'
           source: |
@@ -244,9 +244,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74'
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR'
                       })
                     }
                   );
@@ -260,9 +260,9 @@ paths:
                   url = "https://cryptoapi.access.bit4id.org:13035/api/verify_pin"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
-                    "pin": "belorado74"
+                    "username": "1122338",
+                    "password": "7T8xdGBN",
+                    "pin": "w98nZZDR"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -283,9 +283,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74'
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR'
                       })
                     }
                   );
@@ -307,9 +307,9 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
-                          pin: 'belorado74'
+                          username: '1122338',
+                          password: '7T8xdGBN',
+                          pin: 'w98nZZDR'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/verify_pin", postData);
@@ -518,10 +518,10 @@ paths:
                     https://cryptoapi.access.bit4id.org:13035/api/change_pin \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
-                      "pin": "belorado74",
-                      "newpin": "belorado75"
+                      "username": "1122338",
+                      "password": "7T8xdGBN",
+                      "pin": "w98nZZDR",
+                      "newpin": "newpin12"
                     }'
         - lang: 'Javascript'
           source: |
@@ -533,10 +533,10 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74',
-                        newpin: 'belorado75'
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR',
+                        newpin: 'newpin12'
                       })
                     }
                   );
@@ -550,10 +550,10 @@ paths:
                   url = "https://cryptoapi.access.bit4id.org:13035/api/change_pin"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
-                    "pin": "belorado74",
-                    "newpin": "belorado75"
+                    "username": "1122338",
+                    "password": "7T8xdGBN",
+                    "pin": "w98nZZDR",
+                    "newpin": "newpin12"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -574,10 +574,10 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74',
-                        newpin: 'belorado75'
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR',
+                        newpin: 'newpin12'
                       })
                     }
                   );
@@ -599,10 +599,10 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
-                          pin: 'belorado74',
-                          newpin: 'belorado75'
+                          username: '1122338',
+                          password: '7T8xdGBN',
+                          pin: 'w98nZZDR',
+                          newpin: 'newpin12'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://cryptoapi.access.bit4id.org:13035/api/change_pin", postData);
@@ -781,9 +781,9 @@ paths:
                     https://cryptoapi.access.bit4id.org:13035/api/unlock_pin \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
-                      "newpin": "belorado74",
+                      "username": "1122338",
+                      "password": "7T8xdGBN",
+                      "newpin": "w98nZZDR",
                       "puk": "b5UGHR2u"
                     }'
         - lang: 'Javascript'
@@ -796,9 +796,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        newpin: 'belorado74',
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        newpin: 'w98nZZDR',
                         puk: 'b5UGHR2u'
                       })
                     }
@@ -813,9 +813,9 @@ paths:
                   url = "https://cryptoapi.access.bit4id.org:13035/api/unlock_pin"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
-                    "newpin": "belorado74",
+                    "username": "1122338",
+                    "password": "7T8xdGBN",
+                    "newpin": "w98nZZDR",
                     "puk": "b5UGHR2u"
                   }
 
@@ -837,9 +837,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        newpin: 'belorado74',
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        newpin: 'w98nZZDR',
                         puk: 'b5UGHR2u'
                       })
                     }
@@ -862,8 +862,8 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
+                          username: '1122338',
+                          password: '7T8xdGBN',
                           newpin: 'string',
                           puk: 'b5UGHR2u'
                         }");
@@ -1089,8 +1089,8 @@ paths:
                     https://cryptoapi.access.bit4id.org:13035/api/get_objects \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
+                      "username": "1122338",
+                      "password": "7T8xdGBN",
                       "type": "null",
                       "identifier": "DS0"
                     }'
@@ -1104,8 +1104,8 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
+                        username: '1122338',
+                        password: '7T8xdGBN',
                         type: 'null',
                         identifier: 'DS0'
                       })
@@ -1121,8 +1121,8 @@ paths:
                   url = "https://cryptoapi.access.bit4id.org:13035/api/get_objects"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
+                    "username": "1122338",
+                    "password": "7T8xdGBN",
                     "type": "null",
                     "identifier": "DS0"
                   }
@@ -1145,8 +1145,8 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
+                        username: '1122338',
+                        password: '7T8xdGBN',
                         type: 'null',
                         identifier: 'DS0'
                       })
@@ -1170,8 +1170,8 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
+                          username: '1122338',
+                          password: '7T8xdGBN',
                           type: 'null',
                           identifier: 'DS0'
                         }");
@@ -1383,9 +1383,9 @@ paths:
                     https://cryptoapi.access.bit4id.org:13035/api/sign_rsa \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
-                      "pin": "belorado74",
+                      "username": "1122338",
+                      "password": "7T8xdGBN",
+                      "pin": "w98nZZDR",
                       "identifier": "DS0",
                       "mechanism": "RSARAW",
                       "plaintext": "T3V0IG1lc3NhZ2UK",
@@ -1402,9 +1402,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74',
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR',
                         identifier: 'DS0',
                         mechanism: 'RSARAW',
                         plaintext: 'T3V0IG1lc3NhZ2UK',
@@ -1423,9 +1423,9 @@ paths:
                   url = "https://cryptoapi.access.bit4id.org:13035/api/sign_rsa"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
-                    "pin": "belorado74",
+                    "username": "1122338",
+                    "password": "7T8xdGBN",
+                    "pin": "w98nZZDR",
                     "identifier": "DS0",
                     "mechanism": "RSARAW",
                     "plaintext": "T3V0IG1lc3NhZ2UK",
@@ -1451,9 +1451,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74',
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR',
                         identifier: 'DS0',
                         mechanism: 'RSARAW',
                         plaintext: 'T3V0IG1lc3NhZ2UK',
@@ -1480,9 +1480,9 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
-                          pin: 'belorado74',
+                          username: '1122338',
+                          password: '7T8xdGBN',
+                          pin: 'w98nZZDR',
                           identifier: 'DS0',
                           mechanism: 'RSARAW',
                           plaintext: 'T3V0IG1lc3NhZ2UK',
@@ -1697,9 +1697,9 @@ paths:
                     https://cryptoapi.access.bit4id.org:13035/api/sign_rsa \
                     -H 'Content-Type: application/json' \
                     -d '{
-                      "username": "5057249",
-                      "password": "Gy6F89xK",
-                      "pin": "belorado74",
+                      "username": "1122338",
+                      "password": "7T8xdGBN",
+                      "pin": "w98nZZDR",
                       "identifier": "DS0",
                       "mechanism": "RSARAW",
                       "plaintext": "T3V0IG1lc3NhZ2UK",
@@ -1716,9 +1716,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74',
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR',
                         identifier: 'DS0',
                         mechanism: 'RSARAW',
                         plaintext: 'T3V0IG1lc3NhZ2UK',
@@ -1737,9 +1737,9 @@ paths:
                   url = "https://cryptoapi.access.bit4id.org:13035/api/sign_rsa"
 
                   payload = {
-                    "username": "5057249",
-                    "password": "Gy6F89xK",
-                    "pin": "belorado74",
+                    "username": "1122338",
+                    "password": "7T8xdGBN",
+                    "pin": "w98nZZDR",
                     "identifier": "DS0",
                     "mechanism": "RSARAW",
                     "plaintext": "T3V0IG1lc3NhZ2UK",
@@ -1765,9 +1765,9 @@ paths:
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        username: '5057249',
-                        password: 'Gy6F89xK',
-                        pin: 'belorado74',
+                        username: '1122338',
+                        password: '7T8xdGBN',
+                        pin: 'w98nZZDR',
                         identifier: 'DS0',
                         mechanism: 'RSARAW',
                         plaintext: 'T3V0IG1lc3NhZ2UK',
@@ -1794,9 +1794,9 @@ paths:
                       using (var client = new HttpClient())
                       {
                         JObject json = JObject.Parse(@"{
-                          username: '5057249',
-                          password: 'Gy6F89xK',
-                          pin: 'belorado74',
+                          username: '1122338',
+                          password: '7T8xdGBN',
+                          pin: 'w98nZZDR',
                           identifier: 'DS0',
                           mechanism: 'RSARAW',
                           plaintext: 'T3V0IG1lc3NhZ2UK',
