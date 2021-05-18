@@ -1,32 +1,24 @@
 # What it is
 
 <div style="text-align: justify">
-SignCloud is the solution for the enrolment, custody and usage of PKI remote credentials. SignCloud allows to digitally sign any document from any platform, desktop and mobile, exploiting a Secure Element on the Cloud, a Remote Virtual Token, thus releasing the End User from the burden of operating a smart card, USB token or any other sort of cryptographic device.
+SignCloud is a solution to perform remote RSA transactions. Cryptographic operations are done in Uanataca Trusted Service Center side, where signature keys are stored in a Qualified Electronic Signature Creation Device (QSCD) system.
 </div>
 
 # How it works
 
-This image summarizes how SignCloud works:
+<div style="text-align: justify">
+An http RESTful API is exposed directly from Uanataca Trusted Service Center.
+<br></br>
+For the execution of signature requests, the hash of the document to be signed must be sent along with the credentials of the SignCloud account that should perform the signature.
+<br></br>
+In case of authentication, the cyphertext that must be decrypted must be sent along with the credentials of the SignCloud account that is required to perform the authentication.
+<br></br>
+Additionally, client applications like Signature Creation Application (SCA) can be interfaced with the remote RSA objects using and extended middleware library that implements the standard cryptographic interfaces for each operating system (PKCS#11, MS CSP, TokenD).
+</div>
+<br></br>
 
 ![img](https://raw.githubusercontent.com/UANATACA/SIGNCLOUD-REPO/main/img/signcloud-hiw.png?token=ATF574RBIQRMTBZ3ZXJHXF3ALXHH2)
-<br></br>
 
-<div style="text-align: justify">
-SignCloud integrates a server side Digital Signature Engine, an Authentication Server, a certified Hardware Security Module (HSM) and an encrypted DB. During the enrollment phase the End User key-pair is generated on-board of the HSM in a secure environment.<br></br>
-</div>
-
-<div style="text-align: justify">
-The private keys are stored and protected by means of the Key Wrapping, a certified native mechanism offered by the HSM. The creation and enrollment of a Remote Virtual Token is performed by means of the Bit4id smartCMS or by means of API.
-<br></br>
-</div>
-
-<div style="text-align: justify">
-The credentials binding a Virtual Token to an End User identity are created during this process. End Users have the sole control of their Virtual Token, in fact key usage is allowed only by Two Factor Authentication; after identification with username/password each signing operation is protected by an OTP request.<br></br>
-</div>
-
-<div style="text-align: justify">
-Every third-party Signature Creation Application (SCA) (e.g. client application, web applet, etc.) can be interfaced with the Virtual Token thanks to an extended middleware library that implements the standard cryptographic interfaces for each operating system (PKCS#11, MS CSP, TokenD).<br></br>
-</div>
 
 # Endpoint URLs
 
