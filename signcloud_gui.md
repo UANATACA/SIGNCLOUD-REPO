@@ -17,7 +17,7 @@ Additionally, client applications like Signature Creation Application (SCA) can 
 </div>
 <br></br>
 
-![img](https://raw.githubusercontent.com/UANATACA/SIGNCLOUD-REPO/main/img/signcloud-hiw.png?token=ATF574RBIQRMTBZ3ZXJHXF3ALXHH2)
+<img style="width: 80%; display: block; margin-left: auto; margin-right: auto" src="https://github.com/UANATACA/SIGNCLOUD-REPO/raw/main/img/signcloud-hiw.png"/> 
 
 
 # Endpoint URLs
