@@ -34,7 +34,7 @@ A virtual token is a cloud certificate associated to a SignCloud account.</br>
     <td>POST</td><td><a href='#tag/Token/paths/~1api~1change_pin/post'>/change_pin</td><td>Change a virtual token PIN</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/Token/paths/~1api~1unlock_pin/post'>/unlock_pin</td><td>Unlock the PIN of a locked virutal token</td>
+    <td>POST</td><td><a href='#tag/Token/paths/~1api~1unlock_pin/post'>/unlock_pin</td><td>Unlock the PIN of a locked virtual token</td>
   </tr>
 </table>
 <html>"
