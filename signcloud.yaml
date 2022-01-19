@@ -234,25 +234,6 @@ paths:
                       "password": "7T8xdGBN",
                       "pin": "w98nZZDR"
                     }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    'https://cryptoapi.access.bit4id.org:13035/api/verify_pin',
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        username: '1122338',
-                        password: '7T8xdGBN',
-                        pin: 'w98nZZDR'
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
         - lang: 'Python'
           source: |
                   import requests
@@ -273,7 +254,7 @@ paths:
                   print(data)
         - lang: 'Node.js'
           source: |
-                  const fetch = require('node-fetch');
+                  import fetch from "node-fetch";
 
                   const resp = await fetch(
                     'https://cryptoapi.access.bit4id.org:13035/api/verify_pin',
@@ -523,26 +504,6 @@ paths:
                       "pin": "w98nZZDR",
                       "newpin": "newpin12"
                     }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    'https://cryptoapi.access.bit4id.org:13035/api/change_pin',
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        username: '1122338',
-                        password: '7T8xdGBN',
-                        pin: 'w98nZZDR',
-                        newpin: 'newpin12'
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
         - lang: 'Python'
           source: |
                   import requests
@@ -564,7 +525,7 @@ paths:
                   print(data)
         - lang: 'Node.js'
           source: |
-                  const fetch = require('node-fetch');
+                  import fetch from "node-fetch";
 
                   const resp = await fetch(
                     'https://cryptoapi.access.bit4id.org:13035/api/change_pin',
@@ -786,26 +747,6 @@ paths:
                       "newpin": "w98nZZDR",
                       "puk": "b5UGHR2u"
                     }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    'https://cryptoapi.access.bit4id.org:13035/api/unlock_pin',
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        username: '1122338',
-                        password: '7T8xdGBN',
-                        newpin: 'w98nZZDR',
-                        puk: 'b5UGHR2u'
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
         - lang: 'Python'
           source: |
                   import requests
@@ -827,7 +768,7 @@ paths:
                   print(data)
         - lang: 'Node.js'
           source: |
-                  const fetch = require('node-fetch');
+                  import fetch from "node-fetch";
 
                   const resp = await fetch(
                     'https://cryptoapi.access.bit4id.org:13035/api/unlock_pin',
@@ -1094,26 +1035,6 @@ paths:
                       "type": "null",
                       "identifier": "DS0"
                     }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    'https://cryptoapi.access.bit4id.org:13035/api/get_objects',
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        username: '1122338',
-                        password: '7T8xdGBN',
-                        type: 'null',
-                        identifier: 'DS0'
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
         - lang: 'Python'
           source: |
                   import requests
@@ -1135,7 +1056,7 @@ paths:
                   print(data)
         - lang: 'Node.js'
           source: |
-                  const fetch = require('node-fetch');
+                  import fetch from "node-fetch";
 
                   const resp = await fetch(
                     'https://cryptoapi.access.bit4id.org:13035/api/get_objects',
@@ -1392,30 +1313,6 @@ paths:
                       "billing_username": "billing_user@domain",
                       "billing_password": "z5qNqkfB"
                     }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        username: '1122338',
-                        password: '7T8xdGBN',
-                        pin: 'w98nZZDR',
-                        identifier: 'DS0',
-                        mechanism: 'RSARAW',
-                        plaintext: 'T3V0IG1lc3NhZ2UK',
-                        billing_username: 'billing_user@domain',
-                        billing_password: 'z5qNqkfB'
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
         - lang: 'Python'
           source: |
                   import requests
@@ -1441,7 +1338,7 @@ paths:
                   print(data)
         - lang: 'Node.js'
           source: |
-                  const fetch = require('node-fetch');
+                  import fetch from "node-fetch";
 
                   const resp = await fetch(
                     'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
@@ -1706,30 +1603,6 @@ paths:
                       "billing_username": "billing_user@domain",
                       "billing_password": "z5qNqkfB"
                     }'
-        - lang: 'Javascript'
-          source: |
-                  const resp = await fetch(
-                    'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        username: '1122338',
-                        password: '7T8xdGBN',
-                        pin: 'w98nZZDR',
-                        identifier: 'DS0',
-                        mechanism: 'RSARAW',
-                        plaintext: 'T3V0IG1lc3NhZ2UK',
-                        billing_username: 'billing_user@domain',
-                        billing_password: 'z5qNqkfB'
-                      })
-                    }
-                  );
-
-                  const data = await resp.json();
-                  console.log(data);
         - lang: 'Python'
           source: |
                   import requests
@@ -1755,7 +1628,7 @@ paths:
                   print(data)
         - lang: 'Node.js'
           source: |
-                  const fetch = require('node-fetch');
+                  import fetch from "node-fetch";
 
                   const resp = await fetch(
                     'https://cryptoapi.access.bit4id.org:13035/api/sign_rsa',
