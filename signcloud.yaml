@@ -1434,7 +1434,7 @@ paths:
           examples:
             application/json:
                 {
-                    "result": "T3VyIG1lc3NhZ2UK",
+                    "result": "Decrypted output",
                     "error": null
                 }  
         401:
@@ -1497,36 +1497,6 @@ paths:
                       "details": ""
                     }
                 } 
-        412:
-          description: Missing parameter in JSON object
-          schema:
-            type: object
-            properties:
-              result:
-                type: boolean
-                description: The request result key
-              error:
-                description: The error JSON object
-                properties:
-                  msg: 
-                    type: string
-                  code:
-                    type: number
-                  error_code:
-                    type: number
-                  details:
-                    type: string
-          examples:
-            application/json:
-                {
-                    "result": null,
-                    "error": {
-                      "msg": "Missing parameter",
-                      "code": 412,
-                      "error_code": 6,
-                      "details": "billing_username"
-                    }
-                }
         420:
           description: Authentication refused (after 3 failed attempts)
           schema:
@@ -1591,33 +1561,27 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X POST \
-                    https://signcloud.access.bit4id.org:13035/api/sign_rsa \
+                    https://signcloud.access.bit4id.org:13035/api/decrypt_rsa \
                     -H 'Content-Type: application/json' \
                     -d '{
                       "username": "1122338",
                       "password": "7T8xdGBN",
                       "pin": "w98nZZDR",
                       "identifier": "DS0",
-                      "mechanism": "RSARAW",
-                      "plaintext": "T3V0IG1lc3NhZ2UK",
-                      "billing_username": "billing_user@domain",
-                      "billing_password": "z5qNqkfB"
+                      "ciphertext": "T3V0IG1lc3NhZ2UK"
                     }'
         - lang: 'Python'
           source: |
                   import requests
 
-                  url = "https://signcloud.access.bit4id.org:13035/api/sign_rsa"
+                  url = "https://signcloud.access.bit4id.org:13035/api/decrypt_rsa"
 
                   payload = {
                     "username": "1122338",
                     "password": "7T8xdGBN",
                     "pin": "w98nZZDR",
-                    "identifier": "DS0",
-                    "mechanism": "RSARAW",
-                    "plaintext": "T3V0IG1lc3NhZ2UK",
-                    "billing_username": "billing_user@domain",
-                    "billing_password": "z5qNqkfB"
+                    "identifier": "DS0"
+                    "ciphertext": "T3V0IG1lc3NhZ2UK"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -1631,7 +1595,7 @@ paths:
                   import fetch from "node-fetch";
 
                   const resp = await fetch(
-                    'https://signcloud.access.bit4id.org:13035/api/sign_rsa',
+                    'https://signcloud.access.bit4id.org:13035/api/decrypt_rsa',
                     {
                       method: 'POST',
                       headers: {
@@ -1642,10 +1606,7 @@ paths:
                         password: '7T8xdGBN',
                         pin: 'w98nZZDR',
                         identifier: 'DS0',
-                        mechanism: 'RSARAW',
-                        plaintext: 'T3V0IG1lc3NhZ2UK',
-                        billing_username: 'billing_user@domain',
-                        billing_password: 'z5qNqkfB'
+                        ciphertext: 'T3V0IG1lc3NhZ2UK'
                       })
                     }
                   );
@@ -1671,13 +1632,10 @@ paths:
                           password: '7T8xdGBN',
                           pin: 'w98nZZDR',
                           identifier: 'DS0',
-                          mechanism: 'RSARAW',
-                          plaintext: 'T3V0IG1lc3NhZ2UK',
-                          billing_username: 'billing_user@domain',
-                          billing_password: 'z5qNqkfB'
+                          ciphertext: 'T3V0IG1lc3NhZ2UK'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-                        var request = await client.PostAsync("https://signcloud.access.bit4id.org:13035/api/sign_rsa", postData);
+                        var request = await client.PostAsync("https://signcloud.access.bit4id.org:13035/api/decrypt_rsa", postData);
                         var response = await request.Content.ReadAsStringAsync();
 
                         Console.WriteLine(response);
@@ -1808,8 +1766,6 @@ definitions:
     - pin
     - identifier
     - ciphertext
-    - billing_username
-    - billing_password
     properties:
       username:
           type: "string"
@@ -1827,9 +1783,3 @@ definitions:
       ciphertext:
           type: "string"
           description: Text to decrypt
-      billing_username:
-          type: "string"
-          description: Billing account username
-      billing_password:
-          type: "string"
-          description: Billing account password
