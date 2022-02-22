@@ -28,7 +28,7 @@ In order to use SignCloud API, every url must be composed as follows:
 
 The {signcloudhost} changes according to the environment:
 
-- **cryptoapi.access.bit4id.org:13035** if the environment is **test**
+- **signcloud.access.bit4id.org:13035/json** if the environment is **test**
 - **cryptoapi.uanataca.com** if the environment is **production**
 
 and {resource} is the name of the resource of our interest.<br>
