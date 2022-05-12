@@ -822,7 +822,7 @@ paths:
     post:
       summary: GET OBJECTS
       tags:
-        - Token
+        - RSA
       description: Retrieves the public key or the certificate of a specified SignCloud account.
       produces:
         - application/json
@@ -1109,7 +1109,7 @@ paths:
     post: 
       summary: OTP
       tags:
-        - Signature
+        - RSA
       description: "Generates an otp for the specified digital identity.</br>
                     <html><blockquote style='background-color:#faf3ac; border-color:#DFDFDF; color:#3b3b3b;'><b>⚠This method is only required and available for specific digital identities</b></blockquote></html>"
       produces:
@@ -1163,7 +1163,30 @@ paths:
                   response = requests.request("POST", url, headers=headers, data=payload)
 
                   print(response.text)       
-              
+        - lang: 'C#'
+          source: |
+                  using System;
+                  using System.Net.Http;
+                  using System.Threading.Tasks;
+
+                  public class Program
+                  {
+                    public static async Task Main(string[] args)
+                    {
+                      using (var client = new HttpClient())
+                      {
+
+                        JsonContent postData = new JsonContent();
+                        postData.Add(new StringContent("1122338"), "username");
+                        postData.Add(new StringContent("7T8xdGBN"), "password");
+                        postData.Add(new StringContent("10"), "uses");
+                        var request = await client.PostAsync("https://signcloud.access.bit4id.org:13035/json/api/generate_otp", postData);
+                        var response = await request.Content.ReadAsStringAsync();
+
+                        Console.WriteLine(response);
+                      }
+                    }
+                  }                
 #############
   /api/sign_rsa:
     post:
@@ -1792,7 +1815,6 @@ definitions:
     - plaintext
     - billing_username
     - billing_password
-    - otp
     properties:
       username:
           type: "string"
@@ -1819,9 +1841,6 @@ definitions:
       billing_password:
           type: "string"
           description: Billing account password
-      otp:
-          type: "string"
-          description: Otp Code
   Credentials_decryptrsa:
     type: "object"
     required:
