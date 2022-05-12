@@ -1117,17 +1117,17 @@ paths:
       consumes:
         - application/json
       parameters:
-      - in: formData
+      - in: path
         name: username
         type: string
         description: Digital identity username
         required: true
-      - in: formData
+      - in: path
         name: password
         description: Digital identity password
         type: string
         required: true
-      - in: formData
+      - in: path
         name: uses
         description: Amount of uses for the generated otp
         type: number
@@ -1152,9 +1152,8 @@ paths:
         - lang: 'curl'
           source: |
                   curl -i -X POST \
-                    'https://signbox.developers.uanataca.com/api/generate_otp' \
-                    -H 'Content-Type: multipart/form-data' \
-                    -F env=prod \
+                    'https://signcloud.access.bit4id.org:13035/json/api/generate_otp' \
+                    -H 'Content-Type: application/json' \
                     -F password=7T8xdGBN \
                     -F username=1122338 \
                     -F uses=10
@@ -1162,15 +1161,16 @@ paths:
           source: |
                   import requests
 
-                  url = "https://signbox.developers.uanataca.com/api/generate_otp"
+                  url = "https://signcloud.access.bit4id.org:13035/json/api/generate_otp"
 
-                  payload = {'env': 'prod',
+                  payload = {
                             'username': '1122338',
                             'password': '7T8xdGBN',
-                            'uses': 10}
+                            'uses': 10
+                            }
 
                   headers = {
-                  'Content-Type': 'multipart/form-data'
+                  'Content-Type': 'application/json'
                   }
 
                   response = requests.request("POST", url, headers=headers, data=payload)
