@@ -1136,7 +1136,7 @@ paths:
           description: Successful Response
           examples:
             application/json:
-              "{"result": {"identifier": "5150552", "additional_data": {"max_uses": 10000, "qualified": true, "number": "+34666778406", "webunlock": true}}, "error": null}"
+              {"result": {"identifier": "5150552", "additional_data": {"max_uses": 10000, "qualified": true, "number": "+34666778406", "webunlock": true}}, "error": null}
       x-codeSamples:
         - lang: 'curl'
           source: |
