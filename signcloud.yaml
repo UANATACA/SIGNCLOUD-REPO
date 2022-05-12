@@ -1105,6 +1105,78 @@ paths:
                     }
                   }
 #############
+  /api/generate_otp:
+    post: 
+      summary: OTP
+      tags:
+        - RSA
+      description: "Generates an otp for the specified digital identity.</br>
+                    <html><blockquote style='background-color:#faf3ac; border-color:#DFDFDF; color:#3b3b3b;'><b>⚠This method is only required and available for specific digital identities</b></blockquote></html>"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: formData
+        name: username
+        type: string
+        description: Digital identity username
+        required: true
+      - in: formData
+        name: password
+        description: Digital identity password
+        type: string
+        required: true
+      - in: formData
+        name: uses
+        description: Amount of uses for the generated otp
+        type: number
+      responses:
+        200:
+          description: Successful Response
+          examples:
+            application/json:
+              {
+                "result": {
+                  "identifier": "5150552",
+                  "additional_data": {
+                  "max_uses": 10000,
+                  "qualified": true,
+                  "number": "+34666778406",
+                  "webunlock": true
+                                      }
+                  },
+                "error": null
+              }
+      x-codeSamples:
+        - lang: 'curl'
+          source: |
+                  curl -i -X POST \
+                    'https://signbox.developers.uanataca.com/api/generate_otp' \
+                    -H 'Content-Type: multipart/form-data' \
+                    -F env=prod \
+                    -F password=7T8xdGBN \
+                    -F username=1122338 \
+                    -F uses=10
+        - lang: 'Python'
+          source: |
+                  import requests
+
+                  url = "https://signbox.developers.uanataca.com/api/generate_otp"
+
+                  payload = {'env': 'prod',
+                            'username': '1122338',
+                            'password': '7T8xdGBN',
+                            'uses': 10}
+
+                  headers = {
+                  'Content-Type': 'multipart/form-data'
+                  }
+
+                  response = requests.request("POST", url, headers=headers, data=payload)
+
+                  print(response.text) 
+#############
   /api/sign_rsa:
     post:
       summary: SIGN RSA
