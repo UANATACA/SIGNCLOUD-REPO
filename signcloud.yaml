@@ -1117,20 +1117,11 @@ paths:
       consumes:
         - application/json
       parameters:
-      - in: path
-        name: username
-        type: string
-        description: Digital identity username
-        required: true
-      - in: path
-        name: password
-        description: Digital identity password
-        type: string
-        required: true
-      - in: path
-        name: uses
-        description: Amount of uses for the generated otp
-        type: number
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials for verification.
+        schema:
+          $ref: "#/definitions/Credentials_generateotp"
       responses:
         200:
           description: Successful Response
@@ -1793,6 +1784,22 @@ definitions:
           type: "string"
           default: "DS0"
           description: Identifier of the pair of keys.
+  Credentials_generateotp:
+    type: "object"
+    required:
+    - username
+    - password
+    - uses  
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
+      uses:
+          type: "number"
+          description: Given uses to OTP
   Credentials_signrsa:
     type: "object"
     required:
