@@ -822,7 +822,7 @@ paths:
     post:
       summary: GET OBJECTS
       tags:
-        - RSA
+        - Token
       description: Retrieves the public key or the certificate of a specified SignCloud account.
       produces:
         - application/json
@@ -1104,94 +1104,6 @@ paths:
                       }
                     }
                   }
-#############
-/api/generate_otp:
-    post: 
-      summary: OTP
-      tags:
-        - RSA
-      description: "Generates an otp for the specified digital identity.</br>
-                    <html><blockquote style='background-color:#faf3ac; border-color:#DFDFDF; color:#3b3b3b;'><b>⚠This method is only required and available for specific digital identities</b></blockquote></html>"
-      produces:
-        - application/json
-      consumes:
-        - application/json
-      parameters:
-      - in: formData
-        name: username
-        type: string
-        description: Digital identity username
-        required: true
-      - in: formData
-        name: password
-        description: Digital identity password
-        type: string
-        required: true
-      - in: formData
-        name: uses
-        description: Amount of uses for the generated otp
-        type: number
-      responses:
-        200:
-          description: Successful Response
-          examples:
-            application/json:
-              {
-                "result": {
-                  "identifier": "5150552",
-                  "additional_data": {"max_uses": 10000, "qualified": true, "number": "+34666778406", "webunlock": true}},
-                  "error": null
-                }
-      x-codeSamples:
-        - lang: 'curl'
-          source: |
-                  curl -i -X POST \
-                    'https://signcloud.access.bit4id.org:13035/json/api/generate_otp' \
-                    -H 'Content-Type: application/json' \
-                    -F password=7T8xdGBN \
-                    -F username=1122338 \
-                    -F uses=10
-        - lang: 'Python'
-          source: |
-                  import requests
-
-                  url = "https://signcloud.access.bit4id.org:13035/json/api/generate_otp"
-
-                  payload = {'username': '1122338',
-                            'password': '7T8xdGBN',
-                            'uses': 10}
-
-                  headers = {
-                  'Content-Type': 'application/json'
-                  }
-
-                  response = requests.request("POST", url, headers=headers, data=payload)
-
-                  print(response.text)       
-        - lang: 'C#'
-          source: |
-                  using System;
-                  using System.Net.Http;
-                  using System.Threading.Tasks;
-
-                  public class Program
-                  {
-                    public static async Task Main(string[] args)
-                    {
-                      using (var client = new HttpClient())
-                      {
-
-                        JsonContent postData = new JsonContent();
-                        postData.Add(new StringContent("1122338"), "username");
-                        postData.Add(new StringContent("7T8xdGBN"), "password");
-                        postData.Add(new StringContent("10"), "uses");
-                        var request = await client.PostAsync("https://signcloud.access.bit4id.org:13035/json/api/generate_otp", postData);
-                        var response = await request.Content.ReadAsStringAsync();
-
-                        Console.WriteLine(response);
-                      }
-                    }
-                  }                
 #############
   /api/sign_rsa:
     post:
