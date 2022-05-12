@@ -1371,8 +1371,7 @@ paths:
                       "mechanism": "RSARAW",
                       "plaintext": "T3V0IG1lc3NhZ2UK",
                       "billing_username": "billing_user@domain",
-                      "billing_password": "z5qNqkfB",
-                      "otp": "123435"
+                      "billing_password": "z5qNqkfB"
                     }'
         - lang: 'Python'
           source: |
@@ -1388,8 +1387,7 @@ paths:
                     "mechanism": "RSARAW",
                     "plaintext": "T3V0IG1lc3NhZ2UK",
                     "billing_username": "billing_user@domain",
-                    "billing_password": "z5qNqkfB",
-                    "otp": "12135"
+                    "billing_password": "z5qNqkfB"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -1417,8 +1415,7 @@ paths:
                         mechanism: 'RSARAW',
                         plaintext: 'T3V0IG1lc3NhZ2UK',
                         billing_username: 'billing_user@domain',
-                        billing_password: 'z5qNqkfB',
-                        otp: '123124'
+                        billing_password: 'z5qNqkfB'
                       })
                     }
                   );
@@ -1447,8 +1444,7 @@ paths:
                           mechanism: 'RSARAW',
                           plaintext: 'T3V0IG1lc3NhZ2UK',
                           billing_username: 'billing_user@domain',
-                          billing_password: 'z5qNqkfB',
-                          otp: '134321'
+                          billing_password: 'z5qNqkfB'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://signcloud.access.bit4id.org:13035/json/api/sign_rsa", postData);
@@ -1825,7 +1821,7 @@ definitions:
           description: Billing account password
       otp:
           type: "string"
-          description: The OTP code previously sent to the user. This parameter is only required and available for specific digital identities
+          description: Otp Code
   Credentials_decryptrsa:
     type: "object"
     required:
