@@ -1129,11 +1129,11 @@ paths:
             application/json:
               {
                 "result": {
-                  "identifier": "5150552",
+                  "identifier": "",
                   "additional_data": {
                   "max_uses": 10000,
                   "qualified": true,
-                  "number": "+34666778406",
+                  "number": "",
                   "webunlock": true
                                       }
                   },
@@ -1837,6 +1837,10 @@ definitions:
       billing_password:
           type: "string"
           description: Billing account password
+      otp:
+          type: "string"
+          description: "The OTP code previously sent to the user.\n
+                        **This parameter is only required and available for specific digital identities**"
   Credentials_decryptrsa:
     type: "object"
     required:
