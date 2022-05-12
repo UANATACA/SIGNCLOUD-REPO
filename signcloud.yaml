@@ -1109,7 +1109,7 @@ paths:
     post: 
       summary: OTP
       tags:
-        - RSA
+        - Signature
       description: "Generates an otp for the specified digital identity.</br>
                     <html><blockquote style='background-color:#faf3ac; border-color:#DFDFDF; color:#3b3b3b;'><b>⚠This method is only required and available for specific digital identities</b></blockquote></html>"
       produces:
@@ -1136,7 +1136,7 @@ paths:
           description: Successful Response
           examples:
             application/json:
-              {"result": {"identifier": "5150552", "additional_data": {"max_uses": 10000, "qualified": true, "number": "+34666778406", "webunlock": true}}, "error": null}
+              "{"result": {"identifier": "5150552", "additional_data": {"max_uses": 10000, "qualified": true, "number": "+34666778406", "webunlock": true}}, "error": null}"
       x-codeSamples:
         - lang: 'curl'
           source: |
@@ -1163,8 +1163,6 @@ paths:
                   response = requests.request("POST", url, headers=headers, data=payload)
 
                   print(response.text)       
-
-              
               
 #############
   /api/sign_rsa:
@@ -1374,7 +1372,7 @@ paths:
                       "plaintext": "T3V0IG1lc3NhZ2UK",
                       "billing_username": "billing_user@domain",
                       "billing_password": "z5qNqkfB",
-                      "otp": "314134"
+                      "otp": "123435"
                     }'
         - lang: 'Python'
           source: |
