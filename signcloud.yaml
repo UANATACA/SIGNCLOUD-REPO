@@ -36,6 +36,9 @@ A virtual token is a cloud certificate associated to a SignCloud account.</br>
   <tr>
     <td>POST</td><td><a href='#tag/Token/paths/~1api~1unlock_pin/post'>/unlock_pin</td><td>Unlock the PIN of a locked virtual token</td>
   </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the public key and certificate of a specified SignCloud account</td>
+  </tr>
 </table>
 <html>"
 
@@ -48,13 +51,13 @@ Sign and decrypt Base64 buffers or get objects associated to a SignCloud account
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the public key and certificate of a specified SignCloud account</td>
-  </tr>
-  <tr>
     <td>POST</td><td><a href='#tag/RSA/paths/~1api~1sign_rsa/post'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
   </tr>
   <tr>
     <td>POST</td><td><a href='#tag/RSA/paths/~1api~1decrypt_rsa/post'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
+  </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1generate_otp/post'>/decrypt_rsa</td><td>Generates an otp for the specified digital identity</td>
   </tr>
 </table> 
 </html>"
@@ -1783,7 +1786,8 @@ definitions:
       identifier:
           type: "string"
           default: "DS0"
-          description: Identifier of the pair of keys.
+          description: Identifier of the pair of keys. Null value retrieves all the objects that the token contains.
+          enum: ["DS0","DS1","null"]
   Credentials_generateotp:
     type: "object"
     required:
