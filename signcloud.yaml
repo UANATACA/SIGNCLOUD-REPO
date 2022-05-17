@@ -37,7 +37,7 @@ A virtual token is a cloud certificate associated to a SignCloud account.</br>
     <td>POST</td><td><a href='#tag/Token/paths/~1api~1unlock_pin/post'>/unlock_pin</td><td>Unlock the PIN of a locked virtual token</td>
   </tr>
   <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the public key and certificate of a specified SignCloud account</td>
+    <td>POST</td><td><a href='#tag/Token/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the public key and certificate of a specified SignCloud account</td>
   </tr>
 </table>
 <html>"
@@ -46,7 +46,10 @@ A virtual token is a cloud certificate associated to a SignCloud account.</br>
     description: "
 <html>
 Sign and decrypt Base64 buffers or get objects associated to a SignCloud account.</br>
-<table>    
+<table>   
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1generate_otp/post'>/generate_otp</td><td>Generates an otp for the specified digital identity</td>
+  </tr> 
   <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
@@ -55,9 +58,6 @@ Sign and decrypt Base64 buffers or get objects associated to a SignCloud account
   </tr>
   <tr>
     <td>POST</td><td><a href='#tag/RSA/paths/~1api~1decrypt_rsa/post'>/decrypt_rsa</td><td>Decrypt a base64 buffer</td>
-  </tr>
-  <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1generate_otp/post'>/generate_otp</td><td>Generates an otp for the specified digital identity</td>
   </tr>
 </table> 
 </html>"
