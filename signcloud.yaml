@@ -48,11 +48,11 @@ A virtual token is a cloud certificate associated to a SignCloud account.</br>
 Sign and decrypt Base64 buffers or get objects associated to a SignCloud account.</br>
 <table>   
   <tr>
-    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1generate_otp/post'>/generate_otp</td><td>Generates an otp for the specified digital identity</td>
-  </tr> 
-  <tr>
     <th>Method</th><th>Endpoint</th><th>Action</th>
   </tr>
+  <tr>
+    <td>POST</td><td><a href='#tag/RSA/paths/~1api~1generate_otp/post'>/generate_otp</td><td>Generates an otp for the specified digital identity</td>
+  </tr> 
   <tr>
     <td>POST</td><td><a href='#tag/RSA/paths/~1api~1sign_rsa/post'>/sign_rsa</td><td>Sign a base64 encoded buffer</td>
   </tr>
