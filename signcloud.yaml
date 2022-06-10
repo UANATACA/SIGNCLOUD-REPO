@@ -39,6 +39,9 @@ A virtual token is a cloud certificate associated to a SignCloud account.</br>
   <tr>
     <td>POST</td><td><a href='#tag/Token/paths/~1api~1get_objects/post'>/get_objects</td><td>Retrieve the public key and certificate of a specified SignCloud account</td>
   </tr>
+  <tr>
+  <td>POST</td><td><a href='#tag/Token/paths/~1api~1token_info/post'>/token_info</td><td>Retrieve the token information of a specified SignCloud account</td>
+  </tr>
 </table>
 <html>"
 
@@ -1107,6 +1110,95 @@ paths:
                       }
                     }
                   }
+
+
+###############################################################################
+  /api/token_info:
+    post:
+      summary: GET TOKEN INFO
+      tags:
+        - Token
+      description: Retrieves the token information of a specified SignCloud account.
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: JSON object that includes the user credentials for verification.
+        schema:
+          $ref: "#/definitions/Credentials_tokeninfo"
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: object
+            properties:
+              result:
+                description: The result JSON object
+                properties:
+                  puk_counter: 
+                    type: number
+                  label:
+                    type: string
+                  qualified:
+                    type: string
+                  pin_counter:
+                    type: number
+                  identifier:
+                    type: string
+                  webunlock:
+                    type: boolean
+              error:
+                type: boolean
+                description: The request error key
+          examples:
+            application/json:
+              {
+                "result": {
+                    "puk_counter": 3,
+                    "label": "xxxxxx_Label",
+                    "qualified": true,
+                    "pin_counter": 3,
+                    "identifier": "xxxxxx",
+                    "webunlock": true
+                },
+                "error": null
+              }
+        401:
+          description: Invalid Credentials
+          schema: 
+            type: object
+            properties: 
+              result:
+                type: boolean
+                description: The request result value
+              error:
+                description: The error JSON object
+                properties: 
+                  msg:
+                    type: string
+                  code:
+                    type: number
+                  error_code:
+                    type: number
+                  details:
+                    type: string
+          examples:
+            application/json:
+              {
+                "result": null,
+                "error": {
+                  "msg": "Invalid credentials",
+                  "code": 401,
+                  "error_code": 1,
+                  "details": ""
+                }
+              }
+
+    
+                  
 #############
   /api/generate_otp:
     post: 
@@ -1788,6 +1880,18 @@ definitions:
           default: "DS0"
           description: Identifier of the pair of keys. Null value retrieves all the objects that the token contains.
           enum: ["DS0","DS1","null"]
+  Credentials_tokeninfo:
+    type: "object"
+    required:
+    - username
+    - password
+    properties:
+      username:
+          type: "string"
+          description: SignCloud account username
+      password:
+          type: "string"
+          description: SignCloud account password
   Credentials_generateotp:
     type: "object"
     required:
