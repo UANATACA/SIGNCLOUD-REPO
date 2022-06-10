@@ -3,7 +3,6 @@ apiDefinitions:
 referenceDocs:
   hideDownloadButton: true
   showConsole: false
-  expandResponses: '200,201'
   scrollYOffset: main-header # Esto baja el panel verical izquierdo justo debajo del header
   generateCodeSamples:
     languages:
