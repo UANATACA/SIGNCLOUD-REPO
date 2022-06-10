@@ -2,6 +2,7 @@ apiDefinitions:
   main: signcloud.yaml
 referenceDocs:
   hideDownloadButton: true
+  jsonSampleExpandLevel: 'all'
   showConsole: false
   scrollYOffset: main-header # Esto baja el panel verical izquierdo justo debajo del header
   generateCodeSamples:
