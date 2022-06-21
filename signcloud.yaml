@@ -1140,6 +1140,7 @@ paths:
                 properties:
                   puk_counter: 
                     type: number
+                    description: Remaining attempts before puk block
                   label:
                     type: string
                   qualified:
