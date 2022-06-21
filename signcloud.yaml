@@ -1118,7 +1118,7 @@ paths:
       summary: GET TOKEN INFO
       tags:
         - Token
-      description: Retrieves the token information of a specified SignCloud account.
+      description: Retrieves the token information of a specified SignCloud account. See description of succesful response for more details.
       produces:
         - application/json
       consumes:
@@ -1140,17 +1140,22 @@ paths:
                 properties:
                   puk_counter: 
                     type: number
-                    description: Remaining attempts before puk block
+                    description: Remaining attempts before PUK lock
                   label:
                     type: string
+                    description: Identifying label
                   qualified:
                     type: string
+                    description: Signature level. Qualified signature level requires an OTP code.
                   pin_counter:
                     type: number
+                    description: Remaining attempts before PIN lock
                   identifier:
                     type: string
+                    description: SignCloud account username
                   webunlock:
                     type: boolean
+                    description: Capability to unlock the token through web recovery
               error:
                 type: boolean
                 description: The request error key
