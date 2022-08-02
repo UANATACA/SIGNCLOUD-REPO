@@ -264,9 +264,9 @@ In case that you want to use Uanataca PKCS#11 libs to complement your own softwa
       CKA_PRIVATE   =   False               
       CKA_VALUE     =   USERNAME PASSWORD   // Login credentials
       CKA_ID        =   login               // Here you specify if you wanna log in or log out
+
+      Replace USERNAME and PASSWORD with credentials to be used
     ````   
-    (Replace **USERNAME** and **PASSWORD** with the cryptowallet credentials)
-<br>
 4. Once the previous steps are completed, the **Remote Slot** will be containing a token with his appropiate objects relative to a specific remote identity.
 
 
