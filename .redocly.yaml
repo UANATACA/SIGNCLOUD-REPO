@@ -36,7 +36,7 @@ referenceDocs:
       typeTitleColor: '#585856'
       labelsTextSize: '1em'
     typography:
-      fontsize:  '14px'     # Tamaño de fuente párrafo regular
+      fontsize:  '16px'     # Tamaño de fuente párrafo regular
       fontFamily: 'Lato'    # Tipografía párrafo regular
       fontWeightRegular: 400 
       heading1:
@@ -71,9 +71,9 @@ referenceDocs:
         keyword:
           color: '#D1949E' # Para keywords como import, var, const, print, etc
       code:
-        fontSize: '12px'
-        fontFamily: 'Courier, monospace'
-        fontWeight: 400
+        fontSize: '16px'
+        fontFamily: 'Courier New, monospace'
+        fontWeight: '400'
         color: '#E20D1B'
         backgroundColor: '#DFDFDF'
     menu:

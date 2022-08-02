@@ -145,7 +145,7 @@ Below a list of HTTP codes, and their description, that can be returned by SignC
 
 # Uanataca PKCS#11
 
-Uanataca provides a set of libraries available for Linux, macOS or Windows delivering a PKCS#11 interface focused on loading SignCloud and Cryptowallet tokens to be saved in a memory state.
+Uanataca provides a set of libraries available for Linux, macOS or Windows delivering a PKCS#11 interface focused on loading SignCloud and Cryptowallet tokens to be saved.
 
 ## Configuration
 
@@ -252,7 +252,7 @@ Once the configuration has been setup and the control process is up, up11 will b
 ## Importing up11
 
 In case that you want to use Uanataca PKCS#11 libs to complement your own software, you must login first to obtain and operate with the desired token.
-### **Logging in**
+### Logging in
 
 1. Load the PKCS#11 module file depending on your desired bitness (32 or 64 bits) and OS. 
 2. Switch to Admin Slot
@@ -275,9 +275,9 @@ In case that you want to use Uanataca PKCS#11 libs to complement your own softwa
 
 ### Logging out
 
-1. Load the pkcs11 ***bit4p11.dll*** depending on your desired bitness (32 or 64 bits).
+1. Load the PKCS#11 module file depending on your desired bitness (32 or 64 bits) and OS. 
 2. Switch to **Admin Slot**
-3. Call the function **C_CreateObject** with the next template:
+3. Call the function C_CreateObject with the next template:
 </br>
 
     ````
