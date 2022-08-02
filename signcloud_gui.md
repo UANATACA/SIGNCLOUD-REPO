@@ -205,6 +205,7 @@ As an optional measure, it is possible to launch automatically the control proce
 
 
 <br>
+
 To set the data provider and/or environment, settings.conf urls has to be modified.<br>
 **Production:**
 * SignCloud: https://signcloud.uanataca.com/smartup
@@ -251,7 +252,7 @@ Once the configuration has been setup and the control process is up, up11 will b
 ## Importing up11
 
 In case that you want to use Uanataca PKCS#11 libs to complement your own software, you must login first to obtain and operate with the desired token.
-### Logging in
+### **Logging in**
 
 1. Load the PKCS#11 module file depending on your desired bitness (32 or 64 bits) and OS. 
 2. Switch to Admin Slot
@@ -267,8 +268,9 @@ In case that you want to use Uanataca PKCS#11 libs to complement your own softwa
     (Replace **USERNAME** and **PASSWORD** with the cryptowallet credentials)
 <br>
 4. Once the previous steps are completed, the **Remote Slot** will be containing a token with his appropiate objects relative to a specific remote identity.
-</br>
 
+
+</br>
 
 ### Logging out
 
