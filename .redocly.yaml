@@ -43,7 +43,7 @@ referenceDocs:
         fontSize: '1,8em'   # Tamaño de títulos categoría 1 
         fontWeight: 600     # Grosor de títulos categoría 1 
         fontFamily: 'Lato'  # Fuente de títulos categoría 1 
-        lineHeight: '3em'   # Altura de fuente párrafo regular
+        lineHeight: '1em'   # Altura de fuente párrafo regular
       heading2:
         fontSize: '1,4em'
         fontWeight: 400
