@@ -1,6 +1,7 @@
 apiDefinitions:
   main: signcloud.yaml
 referenceDocs:
+  htmlTemplate: signcloud_tpl.html
   hideDownloadButton: true
   jsonSampleExpandLevel: 'all'
   showConsole: false
