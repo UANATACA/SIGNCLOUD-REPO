@@ -71,7 +71,7 @@ referenceDocs:
         keyword:
           color: '#D1949E' # Para keywords como import, var, const, print, etc
       code:
-        fontSize: '16px'
+        fontSize: '14px'
         fontFamily: 'Courier New, monospace'
         fontWeight: '400'
         color: '#E20D1B'
