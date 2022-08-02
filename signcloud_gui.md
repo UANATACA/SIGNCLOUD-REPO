@@ -186,6 +186,7 @@ up11/pkcs11/libbit4p11.dylib                              .dylib file
 
 up11/etc/up11/settings.conf                               Configuration file to set data provider
 ```
+<br>
 <div style="text-align: justify">
 You have to extract and mount the up11 depending on your OS and bitness in the directory where you wish them to be.
 <br>
@@ -199,6 +200,7 @@ As an optional measure, it is possible to launch automatically the control proce
     serverprocess=/opt/up11/bin/up11.exe (Sample path)
     serverprocesswait=1000
 
+<br>
 To set the data provider and/or environment, settings.conf urls has to be modified.<br>
 **Production:**
 * SignCloud: https://signcloud.uanataca.com/smartup
@@ -238,8 +240,6 @@ Once the configuration has been setup and the control process is up, up11 will b
 **Remote slot**
 : </br>Remote slot is not going to have any data until the login into a remote token is well-made. Once a login is made, the remote slot is going to be fullfilled with one token and his appropiate objects relative to a specific remote identity. It depends on admin slot to contain data.
 
-</br>
-
 **Admin slot**
 : </br>Admin slot is only used to perform control actions. It works as interface for the login or logout operations of remote tokens through standar PKCS#11 calls. 
 </br>
@@ -263,7 +263,7 @@ In case that you want to use Uanataca PKCS#11 libs to complement your own softwa
     (Replace **USERNAME** and **PASSWORD** with the cryptowallet credentials)
 <br>
 4. Once the previous steps are completed, the **Remote Slot** will be containing a token with his appropiate objects relative to a specific remote identity.
-   </br>
+</br>
 
 
 ### Logging out
@@ -284,7 +284,7 @@ In case that you want to use Uanataca PKCS#11 libs to complement your own softwa
 
 ## Cmd utility
 
-This utility can be used to perform a quick test on pkcs11
+This utility can be used to perform a quick test on pkcs11.
 It is recommended to be in your up11 bin directory when executing the command-lines
 
 ### Logging in
@@ -294,7 +294,9 @@ It is recommended to be in your up11 bin directory when executing the command-li
 This command-line intends to login into **Admin slot** (1) to save the token and his objects into **Remote slot** (0).
 
 ![example4](https://github.com/WilterToen/Img/blob/0e11b09b1b1439ab6acd77c2f079e19c9748e58b/Admin-slot.png?raw=true)
-</br>
+
+
+<br>
 
     cmd.exe util list-objects --slot-number 0
 
