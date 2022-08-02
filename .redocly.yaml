@@ -37,7 +37,7 @@ referenceDocs:
       typeTitleColor: '#585856'
       labelsTextSize: '1em'
     typography:
-      fontSize:  '14px'     # Tamaño de fuente párrafo regular
+      fontSize:  '16px'     # Tamaño de fuente párrafo regular
       fontFamily: 'Lato'    # Tipografía párrafo regular
       fontWeightRegular: '400' 
       heading1:
