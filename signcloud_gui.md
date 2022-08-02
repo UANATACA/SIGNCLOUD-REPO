@@ -186,7 +186,10 @@ up11/pkcs11/libbit4p11.dylib                              .dylib file
 
 up11/etc/up11/settings.conf                               Configuration file to set data provider
 ```
+
 <br>
+<br>
+
 <div style="text-align: justify">
 You have to extract and mount the up11 depending on your OS and bitness in the directory where you wish them to be.
 <br>
@@ -199,6 +202,7 @@ As an optional measure, it is possible to launch automatically the control proce
     hsm_timeout=1000
     serverprocess=/opt/up11/bin/up11.exe (Sample path)
     serverprocesswait=1000
+
 
 <br>
 To set the data provider and/or environment, settings.conf urls has to be modified.<br>
