@@ -211,7 +211,7 @@ To set the data provider and/or environment, settings.conf urls has to be modifi
 * SignCloud: https://signcloud.uanataca.com/smartup
   
 **Sandbox:**
-* SignCloud: https://signcloud.access.bit4id.org:13035/smartup
+* SignCloud: https://signcloud.sandbox.uanataca.com/smartup
   
 Sample file in production environment:
 
