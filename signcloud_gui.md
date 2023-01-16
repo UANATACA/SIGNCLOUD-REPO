@@ -28,7 +28,7 @@ In order to use SignCloud API, every url must be composed as follows:
 
 The {signcloudhost} changes according to the environment:
 
-- **signcloud.access.bit4id.org:13035/json** if the environment is **test**
+- **cryptoapi.sandbox.uanataca.com** if the environment is **sandbox**
 - **cryptoapi.uanataca.com** if the environment is **production**
 
 and {resource} is the name of the resource of our interest.<br>
@@ -145,7 +145,7 @@ Below a list of HTTP codes, and their description, that can be returned by SignC
 
 # Uanataca PKCS#11
 
-Uanataca provides a set of libraries available for Linux, macOS or Windows delivering a PKCS#11 interface focused on loading SignCloud and Cryptowallet tokens to be saved.
+Uanataca provides a set of libraries available for Linux, macOS or Windows delivering a PKCS#11 interface focused on loading SignCloud tokens to be saved.
 
 ## Configuration
 
@@ -209,11 +209,9 @@ As an optional measure, it is possible to launch automatically the control proce
 To set the data provider and/or environment, settings.conf urls has to be modified.<br>
 **Production:**
 * SignCloud: https://signcloud.uanataca.com/smartup
-* Cryptowallet: https://cryptowallet.uanataca.com/smartup
   
-**Test:**
+**Sandbox:**
 * SignCloud: https://signcloud.access.bit4id.org:13035/smartup
-* Cryptowallet: https://cryptowallet.demo.bit4id.org:13035/smartup
   
 Sample file in production environment:
 
@@ -228,8 +226,7 @@ Sample file in production environment:
     10 |                },
     11 |                "up11.providers": {
     12 |                    "22D5D604-922E-4076-9283-F506D92BEC20": {
-    13 |                        "!url": "https://signcloud.uanataca.com/smartup",
-    14 |                        "!url_cw": "https://cryptowallet.uanataca.com/smartup"
+    13 |                        "!url": "https://signcloud.uanataca.com/smartup"
     15 |                    }
     16 |                }
     17 |            }
@@ -310,14 +307,6 @@ This command-line intends to login into **Admin slot** (1) to save the token and
 This command-line shows all the data previously loaded into slot 1
 >Notes:
 Even if no data is loaded when executing the first order, the utility returns "Succesfully created object"
-
-Example of a cryptowallet with 1 certificate inside
-
-![example9](https://github.com/WilterToen/Img/blob/main/Remote-Slot.png?raw=true)
-
-![](https://github.com/WilterToen/Img/blob/main/Remote-slot2.png?raw=true)
-
-</br>
 
 ### Logging out
 
