@@ -143,14 +143,13 @@ Below a list of HTTP codes, and their description, that can be returned by SignC
 </br> 
 </html>
 
-# Uanataca PKCS#11
+<!--- # Uanataca PKCS#11
 
 Uanataca provides a set of libraries available for Linux, macOS or Windows delivering a PKCS#11 interface focused on loading SignCloud tokens to be saved.
 
 ## Configuration
 
 Files to be configured prior to initialization shown below:
-
 **Windows:**
 ```
 up11/bin/up11.exe                                         Pkcs11 control executable
@@ -322,7 +321,7 @@ This command-line removes the previous login so it gets to clear all the data th
 
 This command-line will be used to check if there's any object into remote slot, if the slot is empty the order will return *"Exception: no token in Remote Slot"*
 
-![example8](https://github.com/WilterToen/Img/blob/main/Logout2.png?raw=true)
+![example8](https://github.com/WilterToen/Img/blob/main/Logout2.png?raw=true) --->!
 
 </br>
 
