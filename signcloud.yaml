@@ -115,7 +115,7 @@ paths:
             type: object
             properties:
               result:
-                type: boolean
+                type: null
                 description: The request result key
               error:
                 description: The error JSON object
@@ -885,7 +885,7 @@ paths:
             type: object
             properties:
               result:
-                type: boolean
+                type: null
                 description: The request result key
               error:
                 description: The error JSON object
@@ -1547,7 +1547,8 @@ paths:
                       "mechanism": "RSARAW",
                       "plaintext": "T3V0IG1lc3NhZ2UK",
                       "billing_username": "billing_user@domain",
-                      "billing_password": "z5qNqkfB"
+                      "billing_password": "z5qNqkfB",
+                      "otp": "123456"
                     }'
         - lang: 'Python'
           source: |
@@ -1563,7 +1564,8 @@ paths:
                     "mechanism": "RSARAW",
                     "plaintext": "T3V0IG1lc3NhZ2UK",
                     "billing_username": "billing_user@domain",
-                    "billing_password": "z5qNqkfB"
+                    "billing_password": "z5qNqkfB",
+                    "otp": "123456"
                   }
 
                   headers = {"Content-Type": "application/json"}
@@ -1591,7 +1593,8 @@ paths:
                         mechanism: 'RSARAW',
                         plaintext: 'T3V0IG1lc3NhZ2UK',
                         billing_username: 'billing_user@domain',
-                        billing_password: 'z5qNqkfB'
+                        billing_password: 'z5qNqkfB',
+                        otp: '123456'
                       })
                     }
                   );
@@ -1620,7 +1623,8 @@ paths:
                           mechanism: 'RSARAW',
                           plaintext: 'T3V0IG1lc3NhZ2UK',
                           billing_username: 'billing_user@domain',
-                          billing_password: 'z5qNqkfB'
+                          billing_password: 'z5qNqkfB',
+                          otp: '123456'
                         }");
                         var postData = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
                         var request = await client.PostAsync("https://signcloud.access.bit4id.org:13035/json/api/sign_rsa", postData);
@@ -1997,6 +2001,7 @@ definitions:
     - plaintext
     - billing_username
     - billing_password
+    - otp
     properties:
       username:
           type: "string"
